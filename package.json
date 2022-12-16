@@ -1,0 +1,34 @@
+{
+  "name": "cordova-plugin-deeplink",
+  "version": "1.3.0",
+  "description": "Web Share API polyfill for Cordova",
+  "cordova": {
+    "id": "cordova-plugin-deeplink",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicoco/cordova-plugin-deeplink.git.git"
+  },
+  "author": "Maksim Chemerisuk <chemerisuk@gmail.com> (https://github.com/chemerisuk)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cicoco/cordova-plugin-deeplink.git/issues"
+  },
+  "homepage": "https://github.com/cicoco/cordova-plugin-deeplink.git#readme",
+  "keywords": [
+    "cordova",
+    "share",
+    "web share",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "scripts": {
+    "version": "perl -p -i -e 's/(version=)\"\\d+\\.\\d+\\.\\d+\"/$1\"'$npm_package_version'\"$2/' plugin.xml && git add plugin.xml",
+    "postversion": "git push && git push --tags"
+  }
+}
