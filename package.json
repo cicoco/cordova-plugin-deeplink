@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-deeplink",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Web Share API polyfill for Cordova",
   "cordova": {
     "id": "cordova-plugin-deeplink",
