@@ -1,7 +1,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
            id="cordova-plugin-deeplink"
-      version="3.0.0">
+      version="3.0.1">
 
     <name>WebShare</name>
     <description>Web Share API polyfill for Cordova</description>
@@ -24,7 +24,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <config-file target="config.xml" parent="/*">
             <feature name="WebShare">
                 <param name="ios-package" value="WebSharePlugin" />
-                <param name="onload" value="false" />
+                <!-- <param name="onload" value="false" /> -->
             </feature>
         </config-file>
 
@@ -36,7 +36,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="WebShare">
                 <param name="android-package" value="by.chemerisuk.cordova.WebSharePlugin" />
-                <param name="onload" value="false" />
+                <!-- <param name="onload" value="false" /> -->
             </feature>
         </config-file>
 
