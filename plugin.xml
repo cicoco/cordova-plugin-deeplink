@@ -1,7 +1,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
            id="cordova-plugin-deeplink"
-      version="2.0.5">
+      version="3.0.0">
 
     <name>WebShare</name>
     <description>Web Share API polyfill for Cordova</description>
@@ -10,8 +10,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <repo>https://github.com/cicoco/cordova-plugin-deeplink.git</repo>
     <issue>https://github.com/cicoco/cordova-plugin-deeplink.git/issues</issue>
 
-    <js-module src="www/WebShare.js" name="WebShare">
-        <clobbers target="window.navigator.share" />
+    <js-module name="WebShare" src="www/WebShare.js">
+        <clobbers target="cordova.plugins.WebShare" />
     </js-module>
 
     <engines>
