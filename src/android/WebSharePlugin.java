@@ -12,15 +12,20 @@ import android.os.Build;
 
 import by.chemerisuk.cordova.support.CordovaMethod;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
+import unic.cicoco.cordova.obsclient.ObsClientPlugin;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
+import org.apache.cordova.LOG;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
 public class WebSharePlugin extends ReflectiveCordovaPlugin {
+
+    private static final String TAG = "WebSharePlugin";
+
     private static final int SHARE_REQUEST_CODE = 18457896;
 
     private CallbackContext shareCallbackContext;
@@ -34,14 +39,13 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
             chosenComponentReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    lastChosenComponent = (ComponentName)intent.getExtras().get(Intent.EXTRA_CHOSEN_COMPONENT);
+                    lastChosenComponent = (ComponentName) intent.getExtras().get(Intent.EXTRA_CHOSEN_COMPONENT);
                 }
             };
 
             cordova.getActivity().registerReceiver(chosenComponentReceiver, new IntentFilter(Intent.EXTRA_CHOSEN_COMPONENT));
 
-            chosenComponentPI = PendingIntent.getBroadcast(cordova.getActivity(),
-                SHARE_REQUEST_CODE + 1, new Intent(Intent.EXTRA_CHOSEN_COMPONENT), PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+            chosenComponentPI = PendingIntent.getBroadcast(cordova.getActivity(), SHARE_REQUEST_CODE + 1, new Intent(Intent.EXTRA_CHOSEN_COMPONENT), PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
         }
     }
 
@@ -52,9 +56,19 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
         }
     }
 
+
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (action.equals("share")) {
+            LOG.d(TAG, "do upload, args:" + (null == args ? "nil" : args.toString()));
+            share(args, callbackContext);
+            return true;
+        }
+        return false;
+    }
+
     @SuppressLint("NewApi")
-    @CordovaMethod
-    protected void share(CordovaArgs args, CallbackContext callbackContext) throws JSONException {
+    private void share(JSONArray args, CallbackContext callbackContext) throws JSONException {
         JSONObject options = args.getJSONObject(0);
         String text = options.optString("text");
         String title = options.optString("title");
@@ -78,7 +92,6 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
         }
 
         cordova.startActivityForResult(this, sendIntent, SHARE_REQUEST_CODE);
-
         this.shareCallbackContext = callbackContext;
     }
 
