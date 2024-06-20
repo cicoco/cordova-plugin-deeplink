@@ -35,6 +35,7 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
 
     @Override
     protected void pluginInitialize() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             chosenComponentReceiver = new BroadcastReceiver() {
                 @Override
@@ -45,7 +46,11 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
 
             cordova.getActivity().registerReceiver(chosenComponentReceiver, new IntentFilter(Intent.EXTRA_CHOSEN_COMPONENT));
 
-            chosenComponentPI = PendingIntent.getBroadcast(cordova.getActivity(), SHARE_REQUEST_CODE + 1, new Intent(Intent.EXTRA_CHOSEN_COMPONENT), PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+            int flags = PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                flags |= PendingIntent.FLAG_IMMUTABLE;
+            }
+            chosenComponentPI = PendingIntent.getBroadcast(cordova.getActivity(), SHARE_REQUEST_CODE + 1, new Intent(Intent.EXTRA_CHOSEN_COMPONENT), flags);
         }
     }
 
