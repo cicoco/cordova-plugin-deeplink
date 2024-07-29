@@ -40,7 +40,10 @@ public class WebSharePlugin extends ReflectiveCordovaPlugin {
             chosenComponentReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    lastChosenComponent = (ComponentName) intent.getExtras().get(Intent.EXTRA_CHOSEN_COMPONENT);
+                    Bundle bundle = intent.getExtras();
+                    if (null != bundle) {
+                        lastChosenComponent = (ComponentName) bundle.get(Intent.EXTRA_CHOSEN_COMPONENT);
+                    }
                 }
             };
 
