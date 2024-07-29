@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.ComponentName;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Bundle;
 
 import by.chemerisuk.cordova.support.CordovaMethod;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
@@ -20,7 +21,6 @@ import org.apache.cordova.LOG;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 public class WebSharePlugin extends ReflectiveCordovaPlugin {
 
